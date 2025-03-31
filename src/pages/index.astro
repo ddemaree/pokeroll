@@ -50,7 +50,7 @@ const ribbons = Object.values(svgRibbons).map(svg => svg.default.src)
 			<button id="getBrushing" class="pokeButton w-[78cqi] leading-none font-semibold border-10 rounded-full">
 				<span>Get Brushing!</span>
 			</button>
-			<div class="flex w-[68cqi] items-center justify-between gap-20">
+			<div class="flex w-[68cqi] items-center justify-between">
 				<button class="pokeButton aspect-[5/4] w-auto" style="--button-color:#fa3c3c">
 					<span class="sr-only">Pokedex</span>
 					<img src={svgPokedex.src} alt="Pokedex" class="w-full h-full object-contain" />
@@ -105,7 +105,7 @@ const ribbons = Object.values(svgRibbons).map(svg => svg.default.src)
 
 	@layer components {
 		.pokeButton {
-			@apply h-28 flex items-center justify-center bg-white leading-none font-semibold border-10 rounded-xl p-3;
+			@apply h-24 flex items-center justify-center bg-white leading-none font-semibold border-10 rounded-xl p-3;
 			--button-color: var(--color-poke-teal);
 			--button-color-dark: oklch(from var(--button-color) calc(l - 0.12) c h);
 			--button-color-light: oklch(from var(--button-color) 0.92 0.06 h);
