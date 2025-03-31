@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap') layer(base);
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Commissioner', sans-serif;
+  --default-font-family: var(--font-sans);
+
+  --color-poke-teal: #68c5d9;
+  --color-poke-teal-dark: #589eba;
+  --color-poke-teal-light: #cceef3;
+}

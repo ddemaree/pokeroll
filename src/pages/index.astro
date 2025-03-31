@@ -7,5 +7,50 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<div class="flex flex-col items-center justify-start h-screen">
+
+		<div class="pt-[72px] flex items-center justify-between w-full">
+			<div></div>
+			<a href="#" class="h-[44px] inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-poke-teal rounded-l-full text-[24px] leading-none w-[40cqi] max-w-[260px]">
+				<span>
+					Main Menu
+				</span>
+			</a>
+		</div>
+
+		<div class="flex-1 flex flex-col items-center justify-center w-full">
+			<button class="pokeButton w-[78cqi] leading-none font-semibold border-10 rounded-full">
+				<span>Get Brushing!</span>
+			</button>
+			<div class="flex items-center justify-between gap-20">
+				<button class="pokeButton w-full" style="--button-color:#fa3c3c">Pokedex</button>
+				<button class="pokeButton w-full " style="--button-color:#fac800">Hats</button>
+			</div>
+		</div>
+		<div>
+			HELLO
+		</div>
+
+		<video class="hidden w-full h-full object-cover" src="https://res.cloudinary.com/demaree/video/upload/ar_9:16,c_crop,g_center,h_1080/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_oihxd9.mp4" autoplay muted loop></video>
+	</div>
 </Layout>
+
+<style>
+	@reference "../styles/global.css";
+
+	@layer components {
+		.pokeButton {
+			@apply h-28 flex items-center justify-center bg-white leading-none font-semibold border-10 rounded-xl;
+			--button-color: var(--color-poke-teal);
+			--button-color-dark: oklch(from var(--button-color) calc(l - 0.12) c h);
+			--button-color-light: oklch(from var(--button-color) 0.92 0.06 h);
+			
+			color: var(--button-color);
+			font-size: 36px;
+			letter-spacing: 0.03em;
+			border-color: var(--button-color);
+			box-shadow: 0 22px 0 0 var(--button-color-dark),
+			0 34px 0 10px var(--button-color-light);
+		}
+	}
+</style>

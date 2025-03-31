@@ -1,3 +1,10 @@
+---
+import './src/styles/global.css'
+import pokebg from '../assets/pokesleep-bg.png'
+const pokebgUrl = `url(${pokebg.src})`
+console.log(pokebgUrl)
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -8,15 +15,22 @@
 		<title>Astro Basics</title>
 	</head>
 	<body>
-		<slot />
+		<div class="pokesleep">
+			<slot />
+		</div>
 	</body>
 </html>
 
-<style>
+<style define:vars={{pokebgUrl}}>
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	.pokesleep {
+		background-image: var(--pokebgUrl);
+		background-size: 90px 80px;
 	}
 </style>
