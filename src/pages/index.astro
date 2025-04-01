@@ -6,20 +6,16 @@ import svgPikahat from '../assets/icons/pikahat@2x.svg'
 import svgPokedex from '../assets/icons/pokedex@2x.svg'
 import svgBackArrow from '../assets/icons/back-arrow@2x.svg'
 import svgGearWheel from '../assets/icons/gear-wheel@2x.svg'
+
 const svgRibbons = import.meta.glob('../assets/icons/ribbon-*.svg', { eager: true })
 // @ts-expect-error
 const ribbons = Object.values(svgRibbons).map(svg => svg.default.src)
-
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<div class="flex flex-col items-center justify-start h-screen">
-
-		<div class="pt-[54px] flex items-center justify-between w-full">
-			<div class="w-[80px] h-[80px] ml-[40px]">
+	<div class="flex flex-col items-center justify-start h-full">
+		<div class="pt-[32px] flex items-center justify-between w-full">
+			<div class="w-[63px] h-[54px] ml-[24px]">
 				<button class="w-full h-full">
 					<img src={svgBackArrow.src} alt="Back" class="w-full h-full object-contain" />
 				</button>
@@ -62,7 +58,7 @@ const ribbons = Object.values(svgRibbons).map(svg => svg.default.src)
 			</div>
 		</div>
 		<div class="pokeBottom flex items-center justify-center w-full h-[24vh]">
-			<button id="gearButton" class="gearWheel ml-8">
+			<button id="gearButton" class="gearWheel ml-4">
 				<img src={svgGearWheel.src} alt="Gear Wheel" class="w-full h-full object-contain" />
 			</button>
 			<div class="flex-1">
@@ -70,32 +66,51 @@ const ribbons = Object.values(svgRibbons).map(svg => svg.default.src)
 			<!-- Dancing Pikachu area -->
 		</div>
 
-		<audio id="backgroundMusic" src="https://res.cloudinary.com/demaree/video/upload/v1743450498/pokemusic-low_kql8hs.m4a" loop></audio>
-
 		<video id="oldFriend" class="hidden absolute z-99 w-full h-full object-cover" src="https://res.cloudinary.com/demaree/video/upload/ar_9:16,c_crop,g_center,h_1080/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_oihxd9.mp4" loop></video>
 	</div>
 </Layout>
 
 <script>
+	const backgroundAudioUrl = "https://res.cloudinary.com/demaree/video/upload/v1743450498/pokemusic-low_kql8hs.m4a";
 
 	const brushButton = document.getElementById('getBrushing') as HTMLButtonElement;
 	const gearButton = document.getElementById('gearButton') as HTMLButtonElement;
 
-	console.log(gearButton)
+	let backgroundMusic: HTMLAudioElement | null = null;
+
 	gearButton.addEventListener('click', event => {
-		const backgroundMusic = document.getElementById('backgroundMusic') as HTMLAudioElement;
-		backgroundMusic.play();
+		if(!backgroundMusic) {
+			backgroundMusic = new Audio(backgroundAudioUrl);
+		}
+
+		if(backgroundMusic.paused) {
+			backgroundMusic.play();
+		} else {
+			backgroundMusic.pause();
+		}
 	})
 
-	brushButton?.addEventListener('click', event => {
-		console.log(brushButton)
+	function revealRickroll() {
 		const oldFriend = document.getElementById('oldFriend') as HTMLVideoElement;
-		const backgroundMusic = document.getElementById('backgroundMusic') as HTMLAudioElement;
 
-		backgroundMusic.pause();
+		if(backgroundMusic && !backgroundMusic.paused) {
+			backgroundMusic.pause();
+		}
 		oldFriend.autoplay = false;
 		oldFriend.style.display = 'block';
 		oldFriend.play();
+	}
+
+	brushButton.addEventListener('animationend', event => {
+		const elem = event.target as HTMLButtonElement;
+		elem.classList.remove('pressed');
+		revealRickroll();
+		console.log('LET THE ROLLING COMMENCE');
+	});
+
+	brushButton?.addEventListener('click', event => {
+		const elem = event.target as HTMLButtonElement;
+		elem.classList.add('pressed');
 	})
 
 </script>
@@ -105,17 +120,29 @@ const ribbons = Object.values(svgRibbons).map(svg => svg.default.src)
 
 	@layer components {
 		.pokeButton {
-			@apply h-24 flex items-center justify-center bg-white leading-none font-semibold border-10 rounded-xl p-3;
+			@apply flex items-center justify-center bg-white leading-none font-semibold border-10 rounded-xl p-3;
 			--button-color: var(--color-poke-teal);
 			--button-color-dark: oklch(from var(--button-color) calc(l - 0.12) c h);
 			--button-color-light: oklch(from var(--button-color) 0.92 0.06 h);
 			
+			height: 96px;
 			color: var(--button-color);
 			font-size: 36px;
 			letter-spacing: 0.03em;
 			border-color: var(--button-color);
-			box-shadow: 0 22px 0 0 var(--button-color-dark),
-			0 34px 0 10px var(--button-color-light);
+			transform: translateY(var(--button-offset));
+			box-shadow: 
+				0 var(--shadow-offset-1) 0 0 var(--button-color-dark),
+				0 var(--shadow-offset-2) 0 10px var(--button-color-light);
+
+				
+			&.pressed {
+				/* opacity: 0.5; */
+				animation: pokeButtonPress 0.3s ease-in-out;
+				/* --shadow-offset-1: 0px;
+				--shadow-offset-2: 10px;
+				--button-offset: 20px; */
+			}
 		}
 
 		.pokeRibbon {
@@ -148,7 +175,7 @@ const ribbons = Object.values(svgRibbons).map(svg => svg.default.src)
 		}
 
 		.gearWheel {
-			@apply w-[78px] h-[78px];
+			@apply w-[16cqi] max-w-[120px] h-auto aspect-square;
 		}
 
 		.pokeBottom {

@@ -10,3 +10,38 @@
   --color-poke-teal-dark: #589eba;
   --color-poke-teal-light: #cceef3;
 }
+
+@property --button-offset {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --shadow-offset-1 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 20px;
+}
+@property --shadow-offset-2 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 30px;
+}
+
+@keyframes pokeButtonPress {
+  0% {
+    --button-offset: 0px;
+    --shadow-offset-1: 20px;
+    --shadow-offset-2: 30px;
+  }
+  50% {
+    --shadow-offset-1: 0px;
+    --shadow-offset-2: 10px;
+    --button-offset: 20px;
+  }
+  100% {
+    --button-offset: 0px;
+    --shadow-offset-1: 20px;
+    --shadow-offset-2: 30px;
+  }
+}
