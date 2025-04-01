@@ -25,8 +25,37 @@ const cuteCatImageUrl = new URL(imgCuteCat.src, baseUrl);
     <meta name="twitter:creator" content="@ddemaree">
 	</head>
 	<body>
-    <div class="bg-red w-dvw h-dvh relative">
-      <video class="absolute z-99 w-full h-full object-cover" src="https://res.cloudinary.com/demaree/video/upload/ar_9:16,c_crop,g_center,h_1080/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_oihxd9.mp4" autoplay loop></video>
+    <div class="bg-blue-100 w-dvw h-dvh relative flex flex-col items-center justify-center">
+      <div class="bg-white px-4 py-8 w-full border-b-4 border-b-teal-500">
+        <h1 class="font-maru-mega uppercase text-5xl leading-[0.5] text-pink-500">OMGSOCUTE</h1>
+      </div>
+      <div class="flex-1 w-full flex flex-col items-center justify-center">
+
+      <div class="w-[87%] max-w-[600px]">
+        <button id="cuteness" class="relative w-full rounded-md overflow-hidden">
+          <img src={imgCuteCat.src} class="w-full h-auto aspect-video object-cover" />
+          <div class="absolute inset-0 w-full h-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-[30cqi]"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" class="fill-white/60"/></svg>
+          </div>
+        </button>
+        <h2 class="font-maru text-4xl mt-3">🐇 Cat in a bunny costume 🐈</h2>
+      </div>
     </div>
+
+      <video id="theVideoElem" class="hidden absolute z-99 w-full h-full object-cover" src="https://res.cloudinary.com/demaree/video/upload/ar_9:16,c_crop,g_center,h_1080/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_oihxd9.mp4" loop></video>
+    </div>
+    <script>
+      const theVideo = "https://res.cloudinary.com/demaree/video/upload/ar_9:16,c_crop,g_center,h_1080/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_oihxd9.mp4";
+      const cuteBtn = document.getElementById('cuteness') as HTMLButtonElement;
+      
+      cuteBtn.addEventListener('click', e => {
+        const theVideoElem = document.getElementById('theVideoElem') as HTMLVideoElement;
+        theVideoElem.style.display = 'block';
+        theVideoElem.play();
+        // theVideoElem.src = theVideo;
+        // theVideoElem.style.position = 'absolute';
+        // theVideoElem.style.inset = '0px';
+      })
+    </script>
 	</body>
 </html>
